@@ -1,0 +1,5 @@
+name: 'My Custom Action'
+description: 'Checkout, setup JDK and Gradle'
+runs:
+  using: 'node12'
+  main: 'dist/index.js'
