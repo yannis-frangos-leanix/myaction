@@ -32333,13 +32333,16 @@ async function run() {
   try {
     // Checkout repository
 
-    // Get the repository information
     const repo = github.context.repo;
 
+    // Get the GitHub token
     const token = core.getInput('github-token', { required: true });
 
+    // Set the GitHub token as an environment variable
+    process.env.GITHUB_TOKEN = token;
+
     // Clone the repository
-    await exec.exec(`git clone https://${token}@github.com/${repo.owner}/${repo.repo}.git`);
+    await exec.exec(`git clone https://x-access-token:${token}@github.com/${repo.owner}/${repo.repo}.git`);
 
     // Set up JDK
     await exec.exec('wget -qO - https://adoptopenjdk.jfrog.io/adoptopenjdk/api/gpg/key/public | sudo apt-key add -');
