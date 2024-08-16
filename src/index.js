@@ -9,8 +9,10 @@ async function run() {
     // Get the repository information
     const repo = github.context.repo;
 
+    const token = core.getInput('github-token', { required: true });
+
     // Clone the repository
-    await exec.exec(`git clone https://github.com/${repo.owner}/${repo.repo}.git`);
+    await exec.exec(`git clone https://${token}@github.com/${repo.owner}/${repo.repo}.git`);
 
     // Set up JDK
     await exec.exec('wget -qO - https://adoptopenjdk.jfrog.io/adoptopenjdk/api/gpg/key/public | sudo apt-key add -');
