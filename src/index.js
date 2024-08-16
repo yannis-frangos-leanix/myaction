@@ -1,10 +1,16 @@
 const core = require('@actions/core');
 const exec = require('@actions/exec');
+const github = require('@actions/github');
 
 async function run() {
   try {
     // Checkout repository
-    await exec.exec('git clone https://github.com/user/repo.git');
+
+    // Get the repository information
+    const repo = github.context.repo;
+
+    // Clone the repository
+    await exec.exec(`git clone https://github.com/${repo.owner}/${repo.repo}.git`);
 
     // Set up JDK
     await exec.exec('wget -qO - https://adoptopenjdk.jfrog.io/adoptopenjdk/api/gpg/key/public | sudo apt-key add -');
