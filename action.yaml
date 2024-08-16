@@ -1,5 +1,9 @@
 name: 'My Custom Action'
 description: 'Checkout, setup JDK and Gradle'
+inputs:
+  github-token:
+    description: 'GitHub token'
+    required: true
 runs:
   using: 'node12'
   main: 'dist/index.js'
